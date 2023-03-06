@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_github/common/constants/error_handling.dart';
-import 'package:flutter_github/features/home/screens/home_screen.dart';
+import 'package:flutter_github/features/auth/screens/auth_screen.dart';
+import 'package:flutter_github/features/repositories/screens/repositories_screen.dart';
 import 'package:flutter_github/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_github/common/utils/utils.dart';
@@ -24,11 +25,12 @@ class AuthServices {
           context: context,
           onSuccess: () async {
             SharedPreferences prefs = await SharedPreferences.getInstance();
-            await prefs.setString("x-auth-token", personalToken).then(
-                (value) => Navigator.pushNamed(context, HomeScreen.routeName));
+            await prefs.setString("x-auth-token", personalToken).then((value) =>
+                Navigator.pushNamedAndRemoveUntil(
+                    context, RepositoriesScreen.routeName, (route) => false));
           });
     } catch (e) {
-      showSnackBar(context, e.toString());
+      showMyDialog(context);
     }
   }
 
@@ -36,6 +38,7 @@ class AuthServices {
     required BuildContext context,
   }) async {
     try {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? personalToken = prefs.getString('x-auth-token');
       if (personalToken == null) {
@@ -47,12 +50,23 @@ class AuthServices {
           headers: <String, String>{'Authorization': 'Bearer $personalToken'});
 
       if (tokenRes.statusCode == 200) {
-        final userProvider = Provider.of<UserProvider>(context, listen: false);
         final decodeUser = await jsonDecode(tokenRes.body);
-        userProvider.setUser(decodeUser);
+        userProvider.setUser(decodeUser, personalToken!);
       }
     } catch (e) {
-      showSnackBar(context, e.toString());
+      showMyDialog(context);
+    }
+  }
+
+  void logOut({required BuildContext context}) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('x-auth-token', '').then(
+            (value) => Navigator.pushNamedAndRemoveUntil(
+                context, AuthScreen.routeName, (route) => false),
+          );
+    } catch (e) {
+      showMyDialog(context);
     }
   }
 }

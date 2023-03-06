@@ -1,8 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_github/common/utils/colors.dart';
-import 'package:flutter_github/features/auth/screens/auth_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: kBackgroundColor,
       body: SizedBox(
         width: double.maxFinite,
         child: Column(
@@ -25,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(
-                'assets/images/Group.svg',
+                'assets/images/git_avatar.svg',
                 width: 220,
                 height: 220,
               ),

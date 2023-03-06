@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_github/common/utils/utils.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String? hintText;
+  final FormEnum formEnum;
   const CustomTextField({
     Key? key,
     required this.controller,
     required this.hintText,
+    required this.formEnum,
   }) : super(key: key);
 
   @override
@@ -28,7 +31,7 @@ class CustomTextField extends StatelessWidget {
               ))),
       validator: (val) {
         if (val == null || val.isEmpty) {
-          return 'Enter your $hintText';
+          return 'Enter $hintText';
         }
 
         bool isPrefix = (val.startsWith('ghp_') ||
@@ -38,8 +41,10 @@ class CustomTextField extends StatelessWidget {
             val.startsWith('ghr_'));
         bool isRightFormat = (val.contains(RegExp(r'[0-9]')) &&
             (val.contains(RegExp(r'[a-z]')) || val.contains(RegExp(r'[a-z]'))));
-        if (val.length != 40 || !isPrefix || !isRightFormat) {
-          return 'Invalid token';
+        if (formEnum == FormEnum.signIn) {
+          if (val.length != 40 || !isPrefix || !isRightFormat) {
+            return 'Invalid token';
+          }
         }
         return null;
       },

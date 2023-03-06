@@ -5,6 +5,7 @@ class UserProvider extends ChangeNotifier {
   UserModel _userModel = UserModel(
       id: '',
       login: '',
+      accessToken: '',
       avatarUrl: '',
       url: '',
       reposUrl: '',
@@ -16,9 +17,10 @@ class UserProvider extends ChangeNotifier {
 
   UserModel get userModel => _userModel;
 
-  void setUser(Map<String, dynamic> user) {
+  void setUser(Map<String, dynamic> user, String accessToken) {
     Map<String, dynamic> userModel = {
       'id': user['id'].toString(),
+      'accessToken': accessToken,
       'login': user['login'],
       'avatarUrl': user['avatar_url'],
       'url': user['url'],

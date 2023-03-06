@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_github/common/utils/colors.dart';
+import 'package:flutter_github/common/utils/utils.dart';
+import 'package:flutter_github/common/wdigets/custom_button.dart';
 import 'package:flutter_github/common/wdigets/custom_textfield.dart';
-import 'package:flutter_github/common/wdigets/loader.dart';
 import 'package:flutter_github/features/auth/services/auth_services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -51,7 +51,7 @@ class _AuthScreenState extends State<AuthScreen> {
               height: 70,
             ),
             SvgPicture.asset(
-              'assets/images/Group.svg',
+              'assets/images/git_avatar.svg',
             ),
             const SizedBox(
               height: 62,
@@ -61,24 +61,18 @@ class _AuthScreenState extends State<AuthScreen> {
               child: CustomTextField(
                 controller: _tokenController,
                 hintText: 'Personal access token',
+                formEnum: FormEnum.signIn,
               ),
             ),
             const Spacer(),
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: buttonColor,
-                    minimumSize: const Size(double.maxFinite, 48)),
-                onPressed: () {
+            CustomButton(
+                isLoading: isLoading,
+                text: 'Sign In',
+                onTap: () {
                   if (_signInFormKey.currentState!.validate()) {
                     signInUser();
                   }
-                },
-                child: isLoading
-                    ? const SizedBox(width: 23, height: 23, child: Loader())
-                    : const Text(
-                        'Sign In',
-                        style: TextStyle(fontSize: 16),
-                      )),
+                })
           ],
         ),
       ),

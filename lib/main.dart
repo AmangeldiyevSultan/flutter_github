@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_github/common/utils/colors.dart';
-import 'package:flutter_github/common/wdigets/loader.dart';
 import 'package:flutter_github/features/auth/screens/auth_screen.dart';
 import 'package:flutter_github/features/auth/services/auth_services.dart';
-import 'package:flutter_github/features/home/screens/home_screen.dart';
+import 'package:flutter_github/features/repositories/screens/repositories_screen.dart';
 import 'package:flutter_github/features/splash/screens/splash_screen.dart';
 import 'package:flutter_github/providers/user_provider.dart';
 import 'package:flutter_github/router.dart';
@@ -37,10 +36,13 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        scaffoldBackgroundColor: backgroundColor,
-        brightness: Brightness.dark,
-        fontFamily: 'SFPro',
-      ),
+          scaffoldBackgroundColor: kBackgroundColor,
+          brightness: Brightness.dark,
+          fontFamily: 'SFPro',
+          appBarTheme: const AppBarTheme(
+              backgroundColor: kBackgroundColor,
+              elevation: 1,
+              shadowColor: Colors.white)),
       onGenerateRoute: ((settings) => generateRoute(settings)),
       home: FutureBuilder(
           future: authService.getUserData(context: context),
@@ -50,8 +52,11 @@ class _MyAppState extends State<MyApp> {
                       .userModel
                       .id
                       .isNotEmpty
-                  ? const HomeScreen()
+                  ? const RepositoriesScreen()
                   : const AuthScreen();
+            }
+            if (snapshot.connectionState == ConnectionState.none) {
+              return const AuthScreen();
             }
             return const SplashScreen();
           }),

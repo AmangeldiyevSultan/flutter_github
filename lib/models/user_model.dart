@@ -3,6 +3,7 @@ import 'dart:convert';
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class UserModel {
   String id;
+  String accessToken;
   String login;
   String avatarUrl;
   String url;
@@ -14,6 +15,7 @@ class UserModel {
   String updatedAt;
   UserModel({
     required this.id,
+    required this.accessToken,
     required this.login,
     required this.avatarUrl,
     required this.url,
@@ -28,6 +30,7 @@ class UserModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
+      'accessToken': accessToken,
       'login': login,
       'avatarUrl': avatarUrl,
       'url': url,
@@ -43,6 +46,7 @@ class UserModel {
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       id: map['id'] as String,
+      accessToken: map['accessToken'] as String,
       login: map['login'] as String,
       avatarUrl: map['avatarUrl'] as String,
       url: map['url'] as String,

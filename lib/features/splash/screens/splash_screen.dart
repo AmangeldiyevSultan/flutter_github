@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_github/common/utils/colors.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:provider/provider.dart';
+
+import '../../../common/widgets/loader.dart';
+import '../../../providers/user_provider.dart';
+import '../../auth/screens/auth_screen.dart';
+import '../../auth/services/auth_services.dart';
+import '../../repositories/screens/repositories_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   final String? routeName;
@@ -11,31 +17,32 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final AuthServices authService = AuthServices();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kBackgroundColor,
-      body: SizedBox(
-        width: double.maxFinite,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                'assets/images/git_avatar.svg',
-                width: 220,
-                height: 220,
-              ),
-              RichText(
-                  text: const TextSpan(children: <TextSpan>[
-                TextSpan(
-                    text: 'ICE',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
-                TextSpan(text: 'ROCK', style: TextStyle(fontSize: 50)),
-              ]))
-            ]),
-      ),
-    );
+    return FutureBuilder(
+        future: authService.getUserData(context: context),
+        builder: (context, snapshot) {
+          if (ConnectionState.waiting == snapshot.connectionState) {
+            return const Scaffold(body: Loader());
+          } else {
+            FlutterNativeSplash.remove();
+            if (snapshot.connectionState == ConnectionState.none) {
+              return const AuthScreen();
+            } else {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return Provider.of<UserProvider>(context, listen: true)
+                            .userModel
+                            .id !=
+                        null
+                    ? const RepositoriesScreen()
+                    : const AuthScreen();
+              }
+            }
+          }
+
+          return const Scaffold(body: Loader());
+        });
   }
 }

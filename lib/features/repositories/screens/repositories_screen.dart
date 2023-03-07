@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_github/common/utils/colors.dart';
 import 'package:flutter_github/common/utils/git_language_color.dart';
 import 'package:flutter_github/common/utils/utils.dart';
-import 'package:flutter_github/common/wdigets/error_state.dart';
-import 'package:flutter_github/common/wdigets/loader.dart';
+import 'package:flutter_github/common/widgets/error_state.dart';
+import 'package:flutter_github/common/widgets/loader.dart';
 import 'package:flutter_github/features/auth/services/auth_services.dart';
 import 'package:flutter_github/features/repositories/services/repositories_services.dart';
 import 'package:flutter_github/features/repository_page/screens/repository_screen.dart';
@@ -20,7 +20,7 @@ class RepositoriesScreen extends StatefulWidget {
 
 class _RepositoriesScreenState extends State<RepositoriesScreen> {
   AuthServices authServices = AuthServices();
-  RepositoriesServices homeServices = RepositoriesServices();
+  RepositoriesServices repositoriesServices = RepositoriesServices();
   bool isLoading = false;
 
   @override
@@ -28,6 +28,7 @@ class _RepositoriesScreenState extends State<RepositoriesScreen> {
     super.initState();
   }
 
+  // give form prog. language github color
   HexColor giveLangColor(String language) {
     String gitLangColor = gitLanguageColor[0].containsKey(language.toString())
         ? gitLanguageColor[0][language]!
@@ -51,6 +52,7 @@ class _RepositoriesScreenState extends State<RepositoriesScreen> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         actions: [
+          //log out button
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: GestureDetector(
@@ -66,7 +68,7 @@ class _RepositoriesScreenState extends State<RepositoriesScreen> {
         ],
       ),
       body: FutureBuilder(
-          future: homeServices.fetchRepositories(context: context),
+          future: repositoriesServices.fetchRepositories(context: context),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.none) {
               return StateErrorCondition(
@@ -98,6 +100,7 @@ class _RepositoriesScreenState extends State<RepositoriesScreen> {
               );
             }
             RepositoriesModel repositories = snapshot.data!;
+            // repository list
             return ListView.separated(
               itemCount:
                   repositories.totalCount! > 10 ? 10 : repositories.totalCount!,

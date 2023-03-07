@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_github/common/utils/utils.dart';
-import 'package:flutter_github/common/wdigets/custom_button.dart';
-import 'package:flutter_github/common/wdigets/error_state.dart';
-import 'package:flutter_github/common/wdigets/loader.dart';
+import 'package:flutter_github/common/widgets/custom_button.dart';
+import 'package:flutter_github/common/widgets/error_state.dart';
+import 'package:flutter_github/common/widgets/loader.dart';
 import 'package:flutter_github/features/repository_page/services/repository_services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -30,6 +30,7 @@ class _IssuePageState extends State<IssuePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // back arrow button
         leading: GestureDetector(
           onTap: () => Navigator.pop(context),
           child: const Icon(
@@ -59,7 +60,7 @@ class _IssuePageState extends State<IssuePage> {
             }
             if (snapshot.data!.isEmpty) {
               return StateErrorCondition(
-                  buttons: 2,
+                  secondButton: true,
                   onSecondTap: () {
                     setState(() {});
                   },
@@ -69,10 +70,12 @@ class _IssuePageState extends State<IssuePage> {
                   });
             }
             final issueContent = snapshot.data!;
+            // all issues
             return Stack(
               children: [
                 ListView.separated(
                     itemBuilder: (context, index) {
+                      // formatted date
                       String createdAt = dateFormat('yyyy-MM-ddThh:mm:ssZ',
                           issueContent[index].createdAt!, 'dd MMM');
                       return ListTile(
@@ -90,6 +93,7 @@ class _IssuePageState extends State<IssuePage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                // issue details
                                 Row(
                                   children: [
                                     if (issueContent[index].state! == 'open')
@@ -124,7 +128,8 @@ class _IssuePageState extends State<IssuePage> {
                           thickness: 1,
                           color: kDividerColor,
                         )),
-                Expanded(
+                // create issue button
+                Center(
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Padding(

@@ -12,6 +12,20 @@ class CustomTextField extends StatelessWidget {
     required this.formEnum,
   }) : super(key: key);
 
+  bool isPrefix(String inputText) {
+    return (inputText.startsWith('ghp_') ||
+        inputText.startsWith('gho_') ||
+        inputText.startsWith('ghu_') ||
+        inputText.startsWith('ghs_') ||
+        inputText.startsWith('ghr_'));
+  }
+
+  bool isFormat(String inputText) {
+    return (inputText.contains(RegExp(r'[0-9]')) &&
+        (inputText.contains(RegExp(r'[a-z]')) ||
+            inputText.contains(RegExp(r'[a-z]'))));
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -29,20 +43,15 @@ class CustomTextField extends StatelessWidget {
               borderSide: const BorderSide(
                 color: Color(0xff21262D),
               ))),
+      //validate format
       validator: (val) {
         if (val == null || val.isEmpty) {
           return 'Enter $hintText';
         }
-
-        bool isPrefix = (val.startsWith('ghp_') ||
-            val.startsWith('gho_') ||
-            val.startsWith('ghu_') ||
-            val.startsWith('ghs_') ||
-            val.startsWith('ghr_'));
-        bool isRightFormat = (val.contains(RegExp(r'[0-9]')) &&
-            (val.contains(RegExp(r'[a-z]')) || val.contains(RegExp(r'[a-z]'))));
+        bool isPrefixRight = isPrefix(val);
+        bool isRightFormat = isFormat(val);
         if (formEnum == FormEnum.signIn) {
-          if (val.length != 40 || !isPrefix || !isRightFormat) {
+          if (val.length != 40 || !isPrefixRight || !isRightFormat) {
             return 'Invalid token';
           }
         }

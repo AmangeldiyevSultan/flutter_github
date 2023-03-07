@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_github/common/wdigets/loader.dart';
+import 'package:flutter_github/common/utils/size_config.dart';
+import 'package:flutter_github/common/widgets/loader.dart';
 
 import '../utils/colors.dart';
 
@@ -17,8 +18,10 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return ElevatedButton(
         style: ButtonStyle(
+            // button radius
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -26,11 +29,13 @@ class CustomButton extends StatelessWidget {
                         color:
                             color != null ? Colors.grey : Colors.transparent))),
             elevation: MaterialStateProperty.all<double>(0),
+            //backgroundcolor
             backgroundColor: color == null
                 ? MaterialStateProperty.all<Color>(kButtonColor)
                 : MaterialStateProperty.all<Color>(color!),
-            minimumSize: MaterialStateProperty.all<Size>(
-                const Size(double.maxFinite, 48))),
+            minimumSize: MaterialStateProperty.all<Size>(Size(double.maxFinite,
+                SizeConfig.getProportionateScreenHeight(48)))),
+        // on press action
         onPressed: onTap,
         child: isLoading
             ? const SizedBox(width: 23, height: 23, child: Loader())

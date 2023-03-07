@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_github/common/utils/size_config.dart';
 import 'package:flutter_github/common/utils/utils.dart';
-import 'package:flutter_github/common/wdigets/custom_button.dart';
-import 'package:flutter_github/common/wdigets/custom_textfield.dart';
+import 'package:flutter_github/common/widgets/custom_button.dart';
+import 'package:flutter_github/common/widgets/custom_textfield.dart';
 import 'package:flutter_github/features/auth/services/auth_services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -42,20 +43,24 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         child: Column(
           children: [
-            const SizedBox(
-              height: 70,
+            SizedBox(
+              height: SizeConfig.getProportionateScreenHeight(70),
             ),
+
+            //logo
             SvgPicture.asset(
               'assets/images/git_avatar.svg',
             ),
-            const SizedBox(
-              height: 62,
+            SizedBox(
+              height: SizeConfig.getProportionateScreenHeight(62),
             ),
+            // sign in form
             Form(
               key: _signInFormKey,
               child: CustomTextField(
@@ -65,6 +70,7 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
             ),
             const Spacer(),
+            //sign in button
             CustomButton(
                 isLoading: isLoading,
                 text: 'Sign In',

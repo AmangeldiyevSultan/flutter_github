@@ -2,60 +2,63 @@ import 'dart:convert';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class UserModel {
-  String id;
-  String accessToken;
-  String login;
-  String avatarUrl;
-  String url;
-  String reposUrl;
-  String followersUrl;
-  String followingUrl;
-  String type;
-  String createdAt;
-  String updatedAt;
+  int? id;
+  String? accessToken;
+  String? login;
+  String? avatarUrl;
+  String? url;
+  String? reposUrl;
+  String? followersUrl;
+  String? followingUrl;
+  String? type;
+  String? createdAt;
+  String? updatedAt;
   UserModel({
-    required this.id,
-    required this.accessToken,
-    required this.login,
-    required this.avatarUrl,
-    required this.url,
-    required this.reposUrl,
-    required this.followersUrl,
-    required this.followingUrl,
-    required this.type,
-    required this.createdAt,
-    required this.updatedAt,
+    this.id,
+    this.accessToken,
+    this.login,
+    this.avatarUrl,
+    this.url,
+    this.reposUrl,
+    this.followersUrl,
+    this.followingUrl,
+    this.type,
+    this.createdAt,
+    this.updatedAt,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'accessToken': accessToken,
+      'access_token': accessToken,
       'login': login,
-      'avatarUrl': avatarUrl,
+      'avatar_url': avatarUrl,
       'url': url,
-      'reposUrl': reposUrl,
-      'followersUrl': followersUrl,
-      'followingUrl': followingUrl,
+      'repos_url': reposUrl,
+      'followers_url': followersUrl,
+      'following_url': followingUrl,
       'type': type,
-      'createdAt': createdAt,
-      'updatedAt': updatedAt,
+      'created_at': createdAt,
+      'updated_at': updatedAt,
     };
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      id: map['id'] as String,
-      accessToken: map['accessToken'] as String,
-      login: map['login'] as String,
-      avatarUrl: map['avatarUrl'] as String,
-      url: map['url'] as String,
-      reposUrl: map['reposUrl'] as String,
-      followersUrl: map['followersUrl'] as String,
-      followingUrl: map['followingUrl'] as String,
-      type: map['type'] as String,
-      createdAt: map['createdAt'] as String,
-      updatedAt: map['updatedAt'] as String,
+      id: map['id'] != null ? map['id'] as int : null,
+      accessToken:
+          map['access_token'] != null ? map['access_token'] as String : null,
+      login: map['login'] != null ? map['login'] as String : null,
+      avatarUrl: map['avatar_url'] != null ? map['avatar_url'] as String : null,
+      url: map['url'] != null ? map['url'] as String : null,
+      reposUrl: map['repos_url'] != null ? map['repos_url'] as String : null,
+      followersUrl:
+          map['followers_url'] != null ? map['followers_url'] as String : null,
+      followingUrl:
+          map['following_url'] != null ? map['following_url'] as String : null,
+      type: map['type'] != null ? map['type'] as String : null,
+      createdAt: map['created_at'] != null ? map['created_at'] as String : null,
+      updatedAt: map['updated_at'] != null ? map['updated_at'] as String : null,
     );
   }
 

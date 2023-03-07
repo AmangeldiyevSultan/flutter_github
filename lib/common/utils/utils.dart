@@ -4,10 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+// show snackbar
 void showSnackBar(BuildContext context, String text) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
 }
 
+// to show Alert
 Future<void> showMyDialog(context) async {
   return showDialog<void>(
     context: context,
@@ -39,6 +41,7 @@ Future<void> showMyDialog(context) async {
   );
 }
 
+// for trackaring error state
 enum StateEnum {
   connectionError,
   somethingError,
@@ -46,11 +49,13 @@ enum StateEnum {
   loadError,
 }
 
+// for sign form
 enum FormEnum {
   signIn,
   issueFrom,
 }
 
+//convert to letters to sentence format
 extension StringCasingExtension on String {
   String toCapitalized() =>
       length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
@@ -60,17 +65,13 @@ extension StringCasingExtension on String {
       .join(' ');
 }
 
-List<String> convertBase64(String base64Content, String encoding) {
-  List<String> content = [];
-  if (encoding == 'base64') {
-    List<String> base64List = base64Content.split(RegExp(r'\s+'));
-    for (var base64El in base64List) {
-      content.add(utf8.decode(base64Url.decode(base64El)));
-    }
-  }
-  return content;
+// convert from base64 format (for readme)
+String convertBase64(String base64Content) {
+  return utf8
+      .decode(base64.decode(base64Content.replaceAll(RegExp(r'\n'), '')));
 }
 
+// convert from hexcolor for github json colors
 class HexColor extends Color {
   static int _getColor(String hex) {
     String formattedHex = "FF${hex.toUpperCase().replaceAll("#", "")}";
@@ -80,6 +81,7 @@ class HexColor extends Color {
   HexColor(final String hex) : super(_getColor(hex));
 }
 
+// convert to needed date format
 String dateFormat(String from, String fromDate, String to) {
   var inputFormat = DateFormat(from);
   var inputDate = inputFormat.parse(fromDate);

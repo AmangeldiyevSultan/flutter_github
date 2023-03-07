@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 class RepositoriesServices {
+  // fetch all repositories
   Future<RepositoriesModel> fetchRepositories(
       {required BuildContext context}) async {
     final userProvider = context.read<UserProvider>().userModel;
@@ -25,7 +26,7 @@ class RepositoriesServices {
         repositoriesModel = RepositoriesModel.fromMap(respositories);
       }
     } catch (e) {
-      showSnackBar(context, e.toString());
+      showMyDialog(context);
     }
     return repositoriesModel;
   }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_github/common/utils/size_config.dart';
 import 'package:flutter_github/common/utils/utils.dart';
-import 'package:flutter_github/common/wdigets/custom_button.dart';
-import 'package:flutter_github/common/wdigets/custom_textfield.dart';
+import 'package:flutter_github/common/widgets/custom_button.dart';
+import 'package:flutter_github/common/widgets/custom_textfield.dart';
 import 'package:flutter_github/features/repository_page/services/repository_services.dart';
 
 import '../../../common/utils/colors.dart';
@@ -30,6 +31,7 @@ class _CreateIssueScreenState extends State<CreateIssueScreen> {
     descriptionContoller.dispose();
   }
 
+  // create new issue
   void createNewIssue() {
     isLoading = true;
     setState(() {});
@@ -47,6 +49,7 @@ class _CreateIssueScreenState extends State<CreateIssueScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
@@ -66,6 +69,7 @@ class _CreateIssueScreenState extends State<CreateIssueScreen> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
+            // create issue form
             Form(
                 key: _createIssueKey,
                 child: Column(
@@ -75,8 +79,8 @@ class _CreateIssueScreenState extends State<CreateIssueScreen> {
                       hintText: 'Title',
                       formEnum: FormEnum.issueFrom,
                     ),
-                    const SizedBox(
-                      height: 32,
+                    SizedBox(
+                      height: SizeConfig.getProportionateScreenHeight(32),
                     ),
                     CustomTextField(
                       controller: descriptionContoller,
@@ -86,6 +90,7 @@ class _CreateIssueScreenState extends State<CreateIssueScreen> {
                   ],
                 )),
             const Spacer(),
+            //create issue button
             CustomButton(
                 isLoading: isLoading,
                 text: 'Submit new issue',

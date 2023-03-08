@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_github/features/auth/screens/auth_screen.dart';
-import 'package:flutter_github/features/repositories/screens/repositories_screen.dart';
-import 'package:flutter_github/features/repository_page/screens/create_issue_screen.dart';
-import 'package:flutter_github/features/repository_page/screens/issues_page.dart';
-import 'package:flutter_github/features/repository_page/screens/repository_screen.dart';
-import 'package:flutter_github/models/repository_model.dart';
+import 'package:flutter_github/ui/auth_page/auth_screen.dart';
+import 'package:flutter_github/ui/repositories_page/repositories_screen.dart';
+import 'package:flutter_github/ui/repository_page/create_issue_screen.dart';
+import 'package:flutter_github/ui/repository_page/issues_screen.dart';
+import 'package:flutter_github/ui/repository_page/repository_screen.dart';
+import 'package:flutter_github/domains/models/repository_model.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
@@ -21,10 +21,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
     case RepositoriesScreen.routeName:
       return MaterialPageRoute(
           settings: routeSettings, builder: (_) => const RepositoriesScreen());
-    case IssuePage.routeName:
+    case IssueScreen.routeName:
       final repoUrl = routeSettings.arguments as String;
       return MaterialPageRoute(
-          settings: routeSettings, builder: (_) => IssuePage(repoUrl: repoUrl));
+          settings: routeSettings,
+          builder: (_) => IssueScreen(repoUrl: repoUrl));
     case RepositoryScreen.routeName:
       final repositoryModel = routeSettings.arguments as RepositoryModel;
       return MaterialPageRoute(

@@ -1,0 +1,141 @@
+{
+    "sign_in": "Sign In",
+    "@sign_in": {
+      "description": "To Sign in to application"
+    },
+
+    "personal_access_token": "Personal access token",
+    "@personal_access_token": {
+      "description": "Personal access token"
+    },
+    "title": "Title",
+    "@title": {
+      "description": "for textfield form"
+    },
+    "description": "Description",
+    "@description": {
+      "description": "for textfield form"
+    },
+
+    "invalid_token": "Invalid token",
+    "@invalid_token": {
+      "description": "Invalid token"
+    },
+    "enter": "Enter",
+    "@enter": {
+      "description": "for textfield form's hint"
+    },
+
+    "repositories": "Repositories",
+    "@repositories": {
+      "description": "Repositories"
+    },
+    "license": "License",
+    "@license": {
+      "description": "License"
+    },
+    "stars": "stars",
+    "@stars": {
+      "description": "stars"
+    },
+    "forks": "forks",
+    "@forks": {
+      "description": "forks"
+    },
+    "watchers": "watchers",
+    "@watchers": {
+      "description": "watchers"
+    },
+    "issues": "Issues",
+    "@issues": {
+      "description": "Issues"
+    },
+    "no_readme": "No README.md",
+    "@no_readme": {
+      "description": "No README.md"
+    },
+    "view_issues": "View issues",
+    "@view_issues": {
+      "description": "View issues"
+    },
+
+    "issues": "Issues",
+    "@issues": {
+      "description": "Issues"
+    },
+    "open": "Open",
+    "@open": {
+      "description": "Open issue"
+    },
+    "close": "Close",
+    "@close": {
+      "description": "Close issue"
+    },
+    "new_issue": "New issue",
+    "@new_issue": {
+      "description": "New issue"
+    },
+
+    "create_new_issue": "Create new issue",
+    "@create_new_issue": {
+      "description": "Create new issue"
+    },
+    "refresh": "Refresh",
+    "@refresh": {
+      "description": "Refresh"
+    },
+    "sumbit_new_issue": "Submit new issue",
+    "@sumbit_new_issue": {
+      "description": "Submit new issue"
+    },
+    "retry": "Retry",
+    "@retry": {
+      "description": "Retry"
+    },
+
+    "connection_error": "Connection error",
+    "@connection_error": {
+      "description": "Connection error"
+    },
+    "something_error": "Something error",
+    "@something_error": {
+      "description": "Something error"
+    },
+    "load_error": "Load error",
+    "@load_error": {
+      "description": "Load error"
+    },
+    "empty": "Empty",
+    "@empty": {
+      "description": "Empty"
+    },
+    "check_your_internet_connection": "Check your Internet connection",
+    "@check_your_internet_connection": {
+      "description": "Check your Internet connection"
+    },
+    "check_your_something": "Check your something",
+    "@check_your_something": {
+      "description": "Check your something"
+    },
+    "no_repositories_at_the_moment": "No repositories at the moment",
+    "@no_repositories_at_the_moment": {
+      "description": "No repositories at the moment"
+    },
+
+    "error_data_error_code": "Error data / error code",
+    "@error_data_error_code": {
+      "description": "Error data / error code"
+    },
+    "information_for_developers": "information for developers",
+    "@information_for_developers": {
+      "description": "information for developers"
+    },
+    "error": "Error",
+    "@error": {
+      "description": "Error"
+    },
+    "ok": "Ok",
+    "@ok": {
+      "description": "Ok"
+    }
+}
